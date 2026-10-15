@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react'
 
 /**
  * Video ambiental con carga diferida y responsable:
- * - Solo carga y reproduce cuando entra en viewport, en escritorio y sin
- *   `prefers-reduced-motion`. En móvil/uso reducido muestra únicamente el poster.
+ * - Solo carga y reproduce cuando entra en viewport y sin
+ *   `prefers-reduced-motion` (funciona también en móvil).
  * - Silenciado, en bucle y sin controles (contenido ambiental, no narrativo).
  */
 export default function VideoAmbient({ src, poster, posterAlt, className = '' }) {
@@ -37,6 +37,8 @@ export default function VideoAmbient({ src, poster, posterAlt, className = '' })
       video.play?.().catch(() => {})
       return () => video.removeEventListener('ended', restart)
     }
+
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const el = ref.current
