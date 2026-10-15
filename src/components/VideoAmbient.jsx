@@ -41,9 +41,8 @@ export default function VideoAmbient({ src, poster, posterAlt, className = '' })
               el.load()
             }
             el.play?.().catch(() => {})
-          } else {
-            el.pause?.()
           }
+          // No pausar al salir del viewport: mantener reproduciendo en bucle
         })
       },
       { threshold: 0.35 },
