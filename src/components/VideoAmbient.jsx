@@ -23,14 +23,20 @@ export default function VideoAmbient({ src, poster, posterAlt, className = '' })
     video.addEventListener('ended', restart)
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const isDesktop = window.matchMedia('(min-width: 768px)').matches
     const canObserve = 'IntersectionObserver' in window
 
-    if (reduce || !isDesktop || !canObserve) {
+    if (reduce) {
       return () => video.removeEventListener('ended', restart)
     }
 
-    const observer = new IntersectionObserver(
+    if (!canObserve) {
+      if (!video.getAttribute('src')) {
+        video.setAttribute('src', src)
+        video.load()
+      }
+      video.play?.().catch(() => {})
+      return () => video.removeEventListener('ended', restart)
+    }
       (entries) => {
         entries.forEach((entry) => {
           const el = ref.current
