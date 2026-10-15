@@ -18,39 +18,57 @@ function PeluqueroVideo({ src, poster, label }) {
 
   useEffect(() => {
     const el = ref.current
-    if (!el || el.getAttribute('src')) return
+    if (!el) return
+
+    el.loop = true
+    const restart = () => {
+      el.currentTime = 0
+      el.play?.().catch(() => {})
+    }
+    el.addEventListener('ended', restart)
 
     if (!('IntersectionObserver' in window)) {
-      el.setAttribute('src', src)
-      return
+      if (!el.getAttribute('src')) {
+        el.setAttribute('src', src)
+        el.load()
+      }
+      el.play?.().catch(() => {})
+      return () => el.removeEventListener('ended', restart)
     }
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
           const video = ref.current
-          if (video && !video.getAttribute('src')) {
-            video.setAttribute('src', src)
-            video.load()
+          if (!video) return
+          if (entry.isIntersecting) {
+            if (!video.getAttribute('src')) {
+              video.setAttribute('src', src)
+              video.load()
+            }
+            video.play?.().catch(() => {})
+          } else {
+            video.pause?.()
           }
-          io.disconnect()
         })
       },
       { rootMargin: '240px' },
     )
 
     io.observe(el)
-    return () => io.disconnect()
+    return () => {
+      io.disconnect()
+      el.removeEventListener('ended', restart)
+    }
   }, [src])
 
   return (
     <video
       ref={ref}
       className="pelu-video__player"
-      controls
+      muted
+      loop
       playsInline
-      controlsList="nodownload"
       preload="none"
       poster={poster || undefined}
       aria-label={label}
