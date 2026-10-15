@@ -1,0 +1,19 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vite
+.playwright-mcp
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+
+# Carpetas fuente locales (duplican public/ y src/assets; no se suben)
+/imagnes/
+/videos/

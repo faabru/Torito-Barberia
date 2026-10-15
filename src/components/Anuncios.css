@@ -1,0 +1,74 @@
+/* ==========================================================================
+   ANUNCIOS — Marquesina publicitaria (desplazamiento horizontal en loop).
+   Frases de marca + listado de todos los tipos de corte.
+   ========================================================================== */
+
+.anuncios {
+  overflow: hidden;
+  background: var(--negro);
+  color: var(--blanco);
+  border-block: 1px solid var(--borde-inv);
+}
+
+.anuncios__track {
+  display: flex;
+  width: max-content;
+  animation: anuncios-marquesina 45s linear infinite;
+}
+
+.anuncios:hover .anuncios__track {
+  animation-play-state: paused;
+}
+
+.anuncios__row {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.anuncios__item {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding-block: clamp(0.75rem, 2vw, 1.05rem);
+  font-family: var(--fuente-titulo);
+  font-weight: 500;
+  font-size: clamp(1rem, 2.6vw, 1.45rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.anuncios__sep {
+  margin-inline: clamp(0.9rem, 3vw, 2rem);
+  font-size: 0.62em;
+  color: var(--rojo);
+}
+
+@keyframes anuncios-marquesina {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Accesibilidad: sin animación si el usuario prefiere menos movimiento. */
+@media (prefers-reduced-motion: reduce) {
+  .anuncios__track {
+    width: 100%;
+    flex-wrap: wrap;
+    animation: none;
+  }
+
+  .anuncios__row {
+    flex-wrap: wrap;
+  }
+
+  .anuncios__row[aria-hidden='true'] {
+    display: none;
+  }
+}

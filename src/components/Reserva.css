@@ -1,0 +1,129 @@
+/* ==========================================================================
+   RESERVA — Banda de reserva de turno.
+   El video ocupa toda la sección como fondo (16:9 real, sin recorte). Su
+   mitad derecha y la banda superior son blancas, así que el contenido
+   (numeral, kicker, título, texto y botón) se apoya a la derecha, sobre el
+   blanco, y el video queda claramente visible a la izquierda.
+   ========================================================================== */
+
+.reserva {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--blanco);
+  padding-block: 0;
+}
+
+/* Video de fondo, cubriendo toda la sección */
+.reserva__media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.reserva__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* Velo mínimo: solo difumina el borde derecho del video para no ensuciar
+   la zona del texto. El resto del video queda nítido y bien visible. */
+.reserva__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 82%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+}
+
+.reserva__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: clamp(440px, 56.25vw, 860px);
+  padding-block: clamp(3rem, 8vw, 5.5rem);
+}
+
+.reserva__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 42ch;
+  text-align: left;
+}
+
+.reserva__numeral {
+  -webkit-text-stroke: 2px var(--negro);
+  font-size: clamp(3.25rem, 8.5vw, 7rem);
+  --numeral-op: 0.6;
+  margin-bottom: 0.1rem;
+}
+
+.reserva__content h2 {
+  color: var(--negro);
+  max-width: 13ch;
+}
+
+.reserva__content .lead {
+  color: rgba(17, 17, 17, 0.75);
+}
+
+.reserva__cta {
+  align-self: flex-start;
+  margin-top: 0.7rem;
+}
+
+/* --- Móvil / pantallas angostas: mismo criterio que escritorio, el video
+   cubre toda la sección como fondo (sin separarse del contenido). El texto va
+   arriba, sobre la banda blanca del video, y la escena del video queda visible
+   abajo. --- */
+@media (max-width: 899px) {
+  .reserva__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .reserva__video {
+    height: 100%;
+    object-position: 24% 46%;
+  }
+
+  .reserva__scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.9) 40%,
+      rgba(255, 255, 255, 0.62) 52%,
+      rgba(255, 255, 255, 0.2) 64%,
+      rgba(255, 255, 255, 0) 76%
+    );
+  }
+
+  .reserva__inner {
+    min-height: clamp(520px, 86vh, 700px);
+    justify-content: center;
+    align-items: flex-start;
+    padding-block: clamp(2.25rem, 8vw, 3.25rem);
+  }
+
+  .reserva__content {
+    align-items: center;
+    text-align: center;
+    gap: 0.7rem;
+  }
+
+  .reserva__cta {
+    align-self: center;
+  }
+
+  .reserva__numeral {
+    font-size: clamp(2.25rem, 12vw, 3.25rem);
+  }
+}

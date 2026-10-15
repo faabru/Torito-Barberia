@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+# PENDIENTE: agregar la línea "Sitemap: <URL absoluta>/sitemap.xml" al publicar el sitio.

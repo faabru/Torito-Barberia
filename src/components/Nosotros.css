@@ -1,0 +1,175 @@
+.nosotros {
+  overflow: hidden;
+}
+
+/* Marca de agua: isotipo en su versión blanca, con opacidad baja. */
+.nosotros__watermark {
+  position: absolute;
+  right: -6%;
+  bottom: -12%;
+  width: clamp(220px, 34vw, 460px);
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nosotros__watermark img {
+  width: 100%;
+  height: auto;
+}
+
+.nosotros__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(2rem, 6vw, 4rem);
+  align-items: center;
+}
+
+.nosotros__media {
+  position: relative;
+  margin: 0 auto;
+  width: min(100%, 420px);
+  aspect-ratio: 1 / 1;
+}
+
+/* Anillo decorativo alrededor de la foto (sin alterar la imagen) */
+.nosotros__media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--borde-inv);
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.nosotros__media-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Fondo oscuro por si asoma algún borde al escalar en hover */
+  background: #000;
+}
+
+/* La foto ya viene encuadrada y recortada en círculo desde el archivo */
+.nosotros__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform var(--t-medio) var(--ease);
+}
+
+.nosotros__media-link:hover .nosotros__img,
+.nosotros__media-link:focus-visible .nosotros__img {
+  transform: scale(1.04);
+}
+
+/* Etiqueta "Cortes y videos": el círculo entero es el enlace a /peluquero */
+.nosotros__media-badge {
+  position: absolute;
+  left: 50%;
+  bottom: 13%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.74);
+  border: 1px solid var(--borde-inv);
+  color: var(--blanco);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  backdrop-filter: blur(6px);
+}
+
+.nosotros__media-link:focus-visible {
+  outline: 2px solid var(--azul);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nosotros__img {
+    transition: none;
+  }
+}
+
+.nosotros__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.nosotros__content .numeral {
+  color: var(--blanco);
+}
+
+.nosotros__content h2 {
+  max-width: 14ch;
+  margin-top: 0.2rem;
+}
+
+.nosotros__list {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.8rem;
+  border-top: 1px solid var(--borde-inv);
+}
+
+.principio {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--borde-inv);
+}
+
+.principio__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  color: var(--blanco);
+  border: 1px solid var(--borde-inv);
+  border-radius: var(--radio);
+}
+
+.principio:nth-child(even) .principio__icon {
+  color: var(--rojo);
+}
+
+.principio:nth-child(odd) .principio__icon {
+  color: var(--azul);
+}
+
+.principio__title {
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+}
+
+.principio__text {
+  margin-top: 0.2rem;
+  color: var(--gris-texto);
+  font-size: 0.92rem;
+}
+
+@media (min-width: 900px) {
+  .nosotros__grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  }
+  .nosotros__media {
+    margin-inline: 0;
+  }
+}

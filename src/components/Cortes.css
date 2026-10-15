@@ -1,0 +1,143 @@
+/* ============================================================== CORTES ==== */
+.cortes__head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.cortes__head .numeral {
+  color: var(--blanco);
+}
+
+.cortes__head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.cortes__head-text h2 {
+  max-width: 16ch;
+}
+
+.cortes__head-text .lead {
+  color: var(--gris-texto);
+}
+
+/* --- Tarjeta de categoría (enlaza a /hombres) --- */
+.cortes__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  width: min(100%, 460px);
+  margin-inline: auto;
+}
+
+.cortes__cell {
+  min-width: 0;
+}
+
+.cortes__card {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+  background: var(--negro-2);
+  color: var(--blanco);
+  aspect-ratio: 3 / 4;
+}
+
+.cortes__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 720ms var(--ease), filter var(--t-medio) var(--ease);
+}
+
+.cortes__card:hover .cortes__img,
+.cortes__card:focus-visible .cortes__img {
+  transform: scale(1.06);
+}
+
+.cortes__veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 8, 8, 0.92) 0%,
+    rgba(8, 8, 8, 0.55) 38%,
+    rgba(8, 8, 8, 0.12) 68%,
+    rgba(8, 8, 8, 0) 100%
+  );
+}
+
+.cortes__body {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: clamp(1.1rem, 4vw, 1.75rem);
+}
+
+.cortes__name {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  line-height: 1;
+}
+
+.cortes__text {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 34ch;
+}
+
+.cortes__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  font-family: var(--fuente-titulo);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.76rem;
+  color: var(--blanco);
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--blanco);
+  align-self: flex-start;
+  transition: border-color var(--t-medio) var(--ease);
+}
+
+.cortes__cta svg {
+  transition: transform var(--t-medio) var(--ease);
+}
+
+.cortes__card[data-accent='rojo'] .cortes__cta {
+  border-color: var(--rojo);
+}
+
+.cortes__card:hover .cortes__cta svg,
+.cortes__card:focus-visible .cortes__cta svg {
+  transform: translateY(3px);
+}
+
+@media (min-width: 768px) {
+  .cortes__grid {
+    gap: 16px;
+  }
+
+  .cortes__card {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cortes__card {
+    aspect-ratio: 3 / 4;
+  }
+}

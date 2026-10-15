@@ -1,0 +1,236 @@
+.local__head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.local__head .numeral {
+  color: var(--negro);
+}
+
+.local__head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.local__head-text .lead {
+  color: var(--texto-suave);
+}
+
+/* --- Banda de video ambiental --- */
+.local__video {
+  position: relative;
+  margin: 0 0 clamp(2rem, 5vw, 3rem);
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+  background: var(--negro);
+  aspect-ratio: 4 / 3;
+}
+
+.local__video-el {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.local__video-cap {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  padding: 0.35rem 0.75rem;
+  font-family: var(--fuente-titulo);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blanco);
+  background: rgba(17, 17, 17, 0.72);
+  border-radius: var(--radio);
+}
+
+@media (min-width: 768px) {
+  .local__video {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+/* --- Grilla bento --- */
+.local__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: clamp(150px, 44vw, 210px);
+  grid-auto-flow: dense;
+  gap: 10px;
+}
+
+.local__cell {
+  min-width: 0;
+}
+
+.g--normal {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+.g--wide {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+.g--tall {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.local__tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+  background: var(--negro-2);
+}
+
+.local__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 640ms var(--ease), filter var(--t-medio) var(--ease);
+}
+
+.local__tile:hover .local__img,
+.local__tile:focus-visible .local__img {
+  transform: scale(1.05);
+}
+
+.local__zoom {
+  position: absolute;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  color: var(--blanco);
+  background: rgba(17, 17, 17, 0.62);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity var(--t-medio) var(--ease), transform var(--t-medio) var(--ease);
+}
+
+.local__tile:hover .local__zoom,
+.local__tile:focus-visible .local__zoom {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Lightbox --- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  padding: clamp(0.75rem, 3vw, 2rem);
+  background: rgba(8, 8, 8, 0.94);
+  color: var(--blanco);
+  animation: lightbox-in var(--t-medio) var(--ease);
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox__bar {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.lightbox__count {
+  font-family: var(--fuente-titulo);
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  color: var(--gris-texto);
+}
+
+.lightbox__btn,
+.lightbox__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  color: var(--blanco);
+  border: 1px solid var(--borde-inv);
+  border-radius: 50%;
+  background: rgba(17, 17, 17, 0.5);
+  transition: background-color var(--t-rapido) var(--ease), border-color var(--t-rapido) var(--ease);
+}
+
+.lightbox__btn:hover,
+.lightbox__nav:hover {
+  background: var(--negro-3);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox__figure {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 0;
+  margin: 0;
+}
+
+.lightbox__img {
+  max-width: min(92vw, 1100px);
+  max-height: 76vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radio-lg);
+}
+
+.lightbox__caption {
+  font-size: 0.85rem;
+  color: var(--gris-texto);
+  text-align: center;
+  max-width: 60ch;
+}
+
+.lightbox__nav {
+  grid-row: 2;
+  z-index: 1;
+}
+.lightbox__nav--prev {
+  grid-column: 1;
+  justify-self: start;
+}
+.lightbox__nav--next {
+  grid-column: 3;
+  justify-self: end;
+}
+
+@media (min-width: 768px) {
+  .local__grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: clamp(150px, 15vw, 200px);
+    gap: 12px;
+  }
+}

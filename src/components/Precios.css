@@ -1,0 +1,124 @@
+/* ==========================================================================
+   PRECIOS — Sección 05.
+   Carta de precios de referencia (por familia de cortes) + acceso a la
+   página por categoría (/hombres).
+   ========================================================================== */
+
+.precios__head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.precios__head .numeral {
+  color: var(--negro);
+  line-height: 0.8;
+}
+
+.precios__head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.precios__head-text h2 {
+  max-width: 16ch;
+}
+
+.precios__head-text .lead {
+  color: var(--texto-suave);
+}
+
+/* --- Lista tipo carta --- */
+.precios__list {
+  border-top: 1px solid var(--borde);
+}
+
+.precio {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.35rem 1rem;
+  padding: 1.15rem 0.25rem;
+  border-bottom: 1px solid var(--borde);
+  transition: background-color var(--t-medio) var(--ease), padding-left var(--t-medio) var(--ease);
+}
+
+.precio::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--azul);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--t-medio) var(--ease);
+}
+
+.precio:hover {
+  background: rgba(17, 17, 17, 0.03);
+  padding-left: 0.9rem;
+}
+
+.precio:hover::before {
+  transform: scaleY(1);
+}
+
+.precio__num {
+  font-family: var(--fuente-titulo);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--texto-suave);
+}
+
+.precio__name {
+  font-family: var(--fuente-titulo);
+  font-size: clamp(1rem, 3.4vw, 1.35rem);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  color: var(--negro);
+}
+
+.precio__value {
+  justify-self: end;
+  font-family: var(--fuente-titulo);
+  font-weight: 600;
+  font-size: clamp(0.92rem, 2.8vw, 1.1rem);
+  color: var(--negro);
+  white-space: nowrap;
+}
+
+.precios__pagos {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: clamp(1.5rem, 3.5vw, 2.25rem);
+  padding: 0.8rem 1.1rem;
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+  border: 1px solid var(--borde);
+  border-left: 3px solid var(--azul);
+  border-radius: var(--radio);
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.precios__pagos svg {
+  flex-shrink: 0;
+  color: var(--azul);
+}
+
+@media (min-width: 1024px) {
+  .precios__head {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 2.5rem;
+  }
+
+  .precio__name {
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  }
+}

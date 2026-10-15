@@ -1,0 +1,21 @@
+# Barbería Torito
+
+> Barbería en Concepción, Tucumán, Argentina. Cortes con carácter, precisión y atención a cada detalle.
+
+## Datos de contacto
+
+- Dirección: Alberdi 320, T4146 Concepción, Tucumán, Argentina
+- Plus Code: MC54+59 Concepción, Tucumán
+- Teléfono: 03865 22-4504
+
+## Secciones del sitio
+
+- [Inicio](/#inicio)
+- [Servicios](/#servicios)
+- [Galería](/#galeria)
+- [Nosotros](/#nosotros)
+- [Contacto](/#contacto)
+
+## Pendiente de confirmar
+
+Horarios completos, precios, WhatsApp, redes sociales y fotografías definitivas.

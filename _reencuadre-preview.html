@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reencuadre del retrato — Barbería Torito</title>
+<style>
+  :root { --bg:#111; --line:rgba(255,255,255,.12); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:#fff; font:16px/1.5 system-ui,"Segoe UI",Roboto,sans-serif; padding:28px; }
+  h1 { font-size:1.05rem; letter-spacing:.07em; text-transform:uppercase; margin:0 0 4px; }
+  .hint { color:#9a9a9a; margin:0 0 22px; font-size:.9rem; }
+  .controls { display:flex; align-items:center; gap:28px; flex-wrap:wrap; margin-bottom:28px; padding:18px 20px; border:1px solid var(--line); border-radius:16px; background:#161616; }
+  .live { width:200px; aspect-ratio:1/1; border-radius:50%; overflow:hidden; background:#000; box-shadow:0 0 0 1px var(--line); flex:0 0 auto; position:relative; }
+  .live img { width:100%; height:100%; object-fit:cover; display:block; }
+  .panel { display:flex; flex-direction:column; gap:14px; min-width:340px; }
+  label { display:flex; align-items:center; gap:12px; font-size:.95rem; }
+  input[type=range] { width:300px; accent-color:#c0392b; }
+  .val { font-variant-numeric:tabular-nums; font-weight:700; font-size:1.05rem; min-width:56px; }
+  .code { font-family:ui-monospace,Consolas,monospace; background:#000; border:1px solid var(--line); padding:8px 12px; border-radius:9px; font-size:.82rem; color:#8fd; }
+  h2 { font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:#9a9a9a; margin:6px 0 14px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:22px; }
+  .item { text-align:center; }
+  .ring { position:relative; aspect-ratio:1/1; border-radius:50%; overflow:hidden; background:#000; box-shadow:0 0 0 1px var(--line); }
+  .ring img { width:100%; height:100%; object-fit:cover; display:block; }
+  .cap { margin-top:9px; font-size:.88rem; color:#bdbdbd; }
+  .cap b { color:#fff; font-size:1rem; }
+  .badge { position:absolute; left:50%; bottom:13%; transform:translateX(-50%); background:rgba(17,17,17,.74); border:1px solid var(--line); color:#fff; font-size:.62rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .6rem; border-radius:999px; white-space:nowrap; }
+</style>
+</head>
+<body>
+  <h1>Reencuadre del retrato — sección 6 (Identidad)</h1>
+  <p class="hint">Todas las muestras mantienen la cara centrada; solo cambia el <b>acercamiento</b>. Elegí la que más te guste y decime el número.</p>
+
+  <div class="controls">
+    <div class="live"><img id="liveImg" src="/src/assets/photos/perfil-peluquero.jpg" alt="" /><span class="badge">Cortes y videos</span></div>
+    <div class="panel">
+      <label>Acercamiento (zoom): <input id="zoom" type="range" min="1.6" max="4" step="0.02" value="2.5" /> <span class="val" id="zval">2.50</span></label>
+      <label>Ajuste fino vertical: <input id="fine" type="range" min="-6" max="6" step="0.5" value="0" /> <span class="val" id="fval">0%</span></label>
+      <span class="code">--nosotros-zoom: <span id="zcode">2.50</span>; --nosotros-dx: <span id="xcode">-7.5%</span>; --nosotros-dy: <span id="ycode">75%</span>;</span>
+    </div>
+  </div>
+
+  <h2>Variantes de acercamiento (cara centrada)</h2>
+  <div id="grid" class="grid"></div>
+
+  <script>
+    const PHOTO = "/src/assets/photos/perfil-peluquero.jpg"
+    // Constantes derivadas de la foto: mantienen la cara (~53% x, ~18% y) centrada.
+    // dx% = -3.0 * k ; dy% = 32.33 * k - 5  (k = zoom)
+    const dxPct = (k) => (-3.0 * k)
+    const dyPct = (k) => (32.33 * k - 5)
+    const transformFor = (k, fine = 0) => `translate(${dxPct(k)}%, ${dyPct(k) + fine}%) scale(${k})`
+
+    const grid = document.getElementById("grid")
+    const presets = [1.8, 2.1, 2.5, 2.8, 3.1, 3.5]
+    for (const k of presets) {
+      const el = document.createElement("div")
+      el.className = "item"
+      el.innerHTML = `<div class="ring"><img src="${PHOTO}" style="transform:${transformFor(k)}"><span class="badge">Cortes y videos</span></div><div class="cap">zoom <b>${k.toFixed(1)}</b></div>`
+      grid.appendChild(el)
+    }
+
+    const zoom = document.getElementById("zoom"), zval = document.getElementById("zval"), zcode = document.getElementById("zcode")
+    const fine = document.getElementById("fine"), fval = document.getElementById("fval")
+    const xcode = document.getElementById("xcode"), ycode = document.getElementById("ycode")
+    const live = document.getElementById("liveImg")
+    function upd() {
+      const k = Number(zoom.value), f = Number(fine.value)
+      live.style.transform = transformFor(k, f)
+      zval.textContent = k.toFixed(2)
+      fval.textContent = (f > 0 ? "+" : "") + f + "%"
+      zcode.textContent = k.toFixed(2)
+      xcode.textContent = dxPct(k).toFixed(1) + "%"
+      ycode.textContent = (dyPct(k) + f).toFixed(1) + "%"
+    }
+    zoom.addEventListener("input", upd); fine.addEventListener("input", upd); upd()
+  </script>
+</body>
+</html>

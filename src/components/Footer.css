@@ -1,0 +1,324 @@
+/* ==========================================================================
+   FOOTER — Barbería Torito
+   Fondo negro; textos y logos en blanco.
+   ========================================================================== */
+
+.footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--negro);
+  color: var(--blanco);
+  padding-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.footer__divider {
+  height: 6px;
+}
+
+.footer__inner {
+  position: relative;
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* --- Grilla principal: 4 zonas (marca + 3 columnas) --- */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  align-items: start;
+}
+
+/* --- Títulos de columna con ícono --- */
+.footer__col-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blanco);
+  margin-bottom: 1.1rem;
+}
+
+.footer__col-title svg {
+  flex-shrink: 0;
+}
+
+/* --- Listas de enlaces --- */
+.footer__list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.footer__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--blanco);
+  transition: color var(--t-rapido) var(--ease),
+    opacity var(--t-rapido) var(--ease),
+    transform var(--t-rapido) var(--ease);
+}
+
+/* Marcador " > " antes de cada enlace (estilo referencia) */
+.footer__link::before {
+  content: '›';
+  font-size: 1.25rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform var(--t-rapido) var(--ease);
+}
+
+.footer__link:hover,
+.footer__link:focus-visible {
+  color: var(--blanco);
+  opacity: 0.75;
+  transform: translateX(2px);
+}
+
+.footer__link:hover::before,
+.footer__link:focus-visible::before {
+  transform: translateX(3px);
+}
+
+/* --- Marca (logo real + nombre + lema) --- */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer__brand .logo {
+  width: auto;
+  height: auto;
+}
+
+.footer__brand .logo__img {
+  width: clamp(64px, 12vw, 96px);
+  height: clamp(64px, 12vw, 96px);
+  object-fit: contain;
+}
+
+.footer__brand-name {
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blanco);
+  margin: 0;
+}
+
+.footer__tagline {
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* --- Redes sociales (arco curvo ascendente como la referencia) --- */
+.footer__col--redes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__social {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.25rem 0.5rem;
+}
+
+/* Línea curva punteada que une los íconos (arco) */
+.footer__social::before {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.35) 0 5px,
+    transparent 5px 11px
+  );
+  transform: rotate(-14deg);
+  transform-origin: center;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 999px;
+}
+
+/* Cada ítem sobre el arco curvo (no línea recta):
+   Items 2 y 3 se desvían por encima de la recta → arco que sube. */
+.footer__social li {
+  position: relative;
+  z-index: 1;
+  display: flex;
+}
+
+/* TikTok (abajo-izq) */
+.footer__social li:nth-child(1) {
+  transform: translate(-6px, 22px);
+}
+/* Instagram (sube, desviado por encima de la recta → curva) */
+.footer__social li:nth-child(2) {
+  transform: translate(2px, 0px);
+}
+/* WhatsApp (sigue subiendo, desviado por encima de la recta → curva) */
+.footer__social li:nth-child(3) {
+  transform: translate(-2px, -16px);
+}
+/* Facebook (arriba-der, más grande) */
+.footer__social li:nth-child(4) {
+  transform: translate(6px, -30px);
+}
+
+/* Círculo sutil oscuro para que los logos blancos se ordenen en el arco */
+.footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.7);
+  transition: transform var(--t-rapido) var(--ease),
+    box-shadow var(--t-rapido) var(--ease),
+    background var(--t-rapido) var(--ease),
+    border-color var(--t-rapido) var(--ease);
+}
+
+/* Logos de marca forzados a blanco (una sola tinta) */
+.footer__social-link svg {
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+/* Tamaños crecientes (TikTok → IG → WA → FB) */
+.footer__social li:nth-child(1) .footer__social-link {
+  width: 40px;
+  height: 40px;
+}
+.footer__social li:nth-child(1) .footer__social-link svg {
+  width: 22px;
+  height: 22px;
+}
+
+.footer__social li:nth-child(2) .footer__social-link {
+  width: 46px;
+  height: 46px;
+}
+.footer__social li:nth-child(2) .footer__social-link svg {
+  width: 26px;
+  height: 26px;
+}
+
+.footer__social li:nth-child(3) .footer__social-link {
+  width: 52px;
+  height: 52px;
+}
+.footer__social li:nth-child(3) .footer__social-link svg {
+  width: 30px;
+  height: 30px;
+}
+
+.footer__social li:nth-child(4) .footer__social-link {
+  width: 58px;
+  height: 58px;
+}
+.footer__social li:nth-child(4) .footer__social-link svg {
+  width: 34px;
+  height: 34px;
+}
+
+.footer__social-link:hover,
+.footer__social-link:focus-visible {
+  transform: translateY(-4px) scale(1.06);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 22px -6px rgba(0, 0, 0, 0.85);
+}
+
+.footer__social-link--pending {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.footer__social-link--pending:hover,
+.footer__social-link--pending:focus-visible {
+  transform: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Copyright con líneas decorativas a los lados --- */
+.footer__copyright {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+.footer__copyright-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.footer__copyright span:not(.footer__copyright-line) {
+  flex-shrink: 0;
+}
+
+/* --- Responsive --- */
+
+/* Tablet y up: 4 columnas en fila */
+@media (min-width: 768px) {
+  .footer__grid {
+    grid-template-columns: 1.4fr repeat(3, 1fr);
+    text-align: left;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__brand {
+    align-items: flex-start;
+  }
+
+  .footer__col--redes {
+    align-items: flex-start;
+  }
+
+  .footer__social {
+    justify-content: flex-start;
+  }
+}
+
+/* Escritorio: más aire entre columnas */
+@media (min-width: 1025px) {
+  .footer__grid {
+    grid-template-columns: 1.6fr repeat(3, 1fr);
+  }
+}

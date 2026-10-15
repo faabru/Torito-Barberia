@@ -1,0 +1,64 @@
+/* ==========================================================================
+   TOKENS DE DISEÑO — Barbería Torito
+   Concepto: "el poste de barbero en lenguaje contemporáneo".
+   Negro y blanco dominan; rojo y azul solo como acentos mínimos.
+   ========================================================================== */
+
+:root {
+  /* --- Color base (≈90% de la página) --- */
+  --negro: #111111;
+  --blanco: #ffffff;
+
+  /* --- Acentos (uso mínimo: íconos, subrayados, estado, foco, hover) --- */
+  --azul: #2563eb;
+  --rojo: #dc2626;
+
+  /* --- Neutros derivados (solo bordes y textos secundarios) --- */
+  --negro-2: #1c1c1c;
+  --negro-3: #2a2a2a;
+  --gris-claro: #f4f4f4;
+  --gris-texto: #9a9a9a;
+
+  /* --- Semánticos --- */
+  --fondo: var(--blanco);
+  --texto: var(--negro);
+  --texto-suave: #5a5a5a;
+  --borde: rgba(17, 17, 17, 0.12);
+  --borde-inv: rgba(255, 255, 255, 0.14);
+  --foco: var(--azul);
+
+  /* --- Tipografía --- */
+  --fuente-titulo: 'Oswald', 'Arial Narrow', system-ui, sans-serif;
+  --fuente-cuerpo: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Escala fluida (mobile-first) */
+  --fs-hero: clamp(2.75rem, 11vw, 8.5rem);
+  --fs-h2: clamp(2rem, 6vw, 4rem);
+  --fs-h3: clamp(1.25rem, 3.2vw, 1.75rem);
+  --fs-lead: clamp(1.05rem, 2.2vw, 1.35rem);
+  --fs-body: clamp(1rem, 1.6vw, 1.075rem);
+  --fs-small: 0.875rem;
+  --fs-numeral: clamp(3.5rem, 13vw, 9rem);
+
+  /* --- Espaciado / ritmo --- */
+  --esp-seccion: clamp(4.5rem, 11vw, 9rem);
+  --ancho-max: 1240px;
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+
+  /* --- Formas y sombras --- */
+  --radio: 2px;
+  --radio-lg: 4px;
+  --sombra: 0 24px 60px -28px rgba(0, 0, 0, 0.45);
+
+  /* --- Movimiento --- */
+  --t-rapido: 160ms;
+  --t-medio: 240ms;
+  --t-lento: 320ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* --- Layering --- */
+  --z-header: 100;
+  --z-mobilebar: 90;
+  --z-menu: 95;
+  --z-lightbox: 200;
+}

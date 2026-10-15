@@ -1,0 +1,400 @@
+/* ==========================================================================
+   PÁGINA POR CATEGORÍA (ruta: /hombres)
+   ========================================================================== */
+
+.cat-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--blanco);
+  padding-top: calc(68px + env(safe-area-inset-top, 0px));
+}
+
+@media (min-width: 900px) {
+  .cat-page {
+    padding-top: 80px;
+  }
+}
+
+/* --- Hero: imagen de fondo de marca, alto bajo --- */
+.cat-hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: clamp(200px, 30vh, 300px);
+  background-color: var(--negro);
+  background-size: cover;
+  background-position: center;
+  color: var(--blanco);
+  overflow: hidden;
+}
+
+.cat-hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(8, 8, 8, 0.92) 0%,
+    rgba(8, 8, 8, 0.6) 50%,
+    rgba(8, 8, 8, 0.35) 100%
+  );
+}
+
+.cat-hero__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-block: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.cat-hero__eyebrow {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cat-hero__title {
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  line-height: 0.98;
+}
+
+.cat-hero__text {
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 46ch;
+}
+
+/* --- Cabeceras de sección --- */
+.cat-head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  padding-left: clamp(1rem, 3.5vw, 1.5rem);
+  border-left: 3px solid var(--cat-accent, var(--negro));
+}
+
+.cat-head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.cat-head-text h2 {
+  max-width: 18ch;
+}
+
+.cat-tipos .cat-head-text .lead {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* La cabecera de "Tipos de corte" va dentro de un panel oscuro para que los textos se noten bien sobre la foto. */
+.cat-tipos .cat-head {
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1.1rem, 3.5vw, 1.75rem);
+  background: rgba(17, 17, 17, 0.85);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 3px solid var(--cat-accent, var(--blanco));
+  border-radius: var(--radio-lg);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.cat-tipos .cat-head .eyebrow {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cat-tipos .cat-head h2 {
+  color: var(--blanco);
+}
+
+.cat-promos .cat-head-text .lead {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* --- Grupos de la lista de cortes --- */
+.cat-tipos[data-accent='azul'] {
+  --cat-accent: var(--azul);
+}
+
+.cat-tipos[data-accent='rojo'] {
+  --cat-accent: var(--rojo);
+}
+
+/* Fondo con foto del local: SOLO esta sección (no llega a Promos vigentes). */
+.cat-tipos {
+  position: relative;
+  overflow: hidden;
+}
+
+.cat-tipos::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.48) 0%,
+      rgba(255, 255, 255, 0.34) 45%,
+      rgba(255, 255, 255, 0.56) 100%
+    ),
+    var(--cat-bg-foto, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll, fixed;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cat-tipos > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.cat-groups {
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 3.25rem);
+}
+
+.cat-group__title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 3.4vw, 1.35rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--negro);
+  margin-bottom: 1rem;
+}
+
+.cat-group__title::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 24px;
+  height: 3px;
+  background: var(--cat-accent, var(--negro));
+}
+
+/* --- Lista de tipos de corte --- */
+.cat-list {
+  border-top: 1px solid var(--borde);
+}
+
+.cat-price {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    'num price'
+    'text text';
+  align-items: center;
+  gap: 0.5rem 1rem;
+  padding: 1.25rem 0.25rem;
+  border-bottom: 1px solid var(--borde);
+  animation: cat-price-in 500ms var(--ease) both;
+}
+
+@keyframes cat-price-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.cat-price__num {
+  grid-area: num;
+  font-family: var(--fuente-titulo);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  color: var(--texto-suave);
+  align-self: start;
+  padding-top: 0.15rem;
+}
+
+.cat-price__text {
+  grid-area: text;
+}
+
+.cat-price__name {
+  font-size: clamp(1.35rem, 5vw, 2rem);
+  line-height: 0.98;
+}
+
+.cat-price__desc {
+  margin-top: 0.35rem;
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+  max-width: 52ch;
+}
+
+.cat-price__value {
+  grid-area: price;
+  justify-self: end;
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
+  letter-spacing: 0.02em;
+  color: var(--negro);
+  white-space: nowrap;
+}
+
+.cat-note {
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  color: #4a4a4a;
+}
+
+.cat-note--dark {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* --- Promociones --- */
+.cat-promos[data-accent='azul'] {
+  --cat-accent: var(--azul);
+  --cat-accent-text: #8fb3ff;
+}
+
+.cat-promos[data-accent='rojo'] {
+  --cat-accent: var(--rojo);
+  --cat-accent-text: #ff9d94;
+}
+
+.cat-promos__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.cat-promo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  background: linear-gradient(180deg, #1b1b1b 0%, #121212 100%);
+  border: 1px solid var(--borde-inv);
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  transition: border-color var(--t-medio) var(--ease), transform var(--t-medio) var(--ease);
+}
+
+.cat-promo::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--cat-accent, var(--rojo));
+  transform: scaleX(0.3);
+  transform-origin: left center;
+  transition: transform var(--t-medio) var(--ease);
+}
+
+.cat-promo:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-3px);
+}
+
+.cat-promo:hover::before {
+  transform: scaleX(1);
+}
+
+.cat-promo__tag {
+  align-self: flex-start;
+  padding: 0.25rem 0.65rem;
+  font-family: var(--fuente-titulo);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.62rem;
+  color: var(--cat-accent-text, var(--gris-texto));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+.cat-promo__title {
+  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  line-height: 1;
+}
+
+.cat-promo__text {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+}
+
+.cat-promo__vigencia {
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cat-accent-text, var(--blanco));
+}
+
+/* --- CTA final --- */
+.cat-cta__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cat-cta__text p {
+  margin-top: 0.5rem;
+  color: #3a3a3a;
+}
+
+.cat-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .cat-promos__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cat-price {
+    grid-template-columns: 4rem 1fr auto;
+    grid-template-areas: 'num text price';
+    gap: 1.5rem;
+    padding: 1.4rem 0.5rem;
+  }
+
+  .cat-price__num {
+    align-self: center;
+    padding-top: 0;
+    font-size: 1.05rem;
+  }
+
+  .cat-cta__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cat-head {
+    gap: 1rem;
+    padding-left: 1.75rem;
+  }
+}
+
+/* Móvil/táctil: background-attachment fixed no funciona bien; la foto se ampliaría/borrosaría, así que subimos el velo. */
+@media (hover: none) {
+  .cat-tipos::before {
+    background-attachment: scroll, scroll;
+    background-image: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.72) 0%,
+        rgba(255, 255, 255, 0.62) 45%,
+        rgba(255, 255, 255, 0.78) 100%
+      ),
+      var(--cat-bg-foto, none);
+  }
+}

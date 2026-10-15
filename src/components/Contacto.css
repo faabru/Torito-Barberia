@@ -1,0 +1,141 @@
+.contacto__head {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.contacto__head .numeral {
+  color: var(--negro);
+}
+
+.contacto__head-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.contacto__head-text h2 {
+  max-width: 16ch;
+}
+
+.contacto__head-text .lead {
+  color: var(--texto-suave);
+}
+
+.contacto__grid {
+  display: grid;
+  gap: clamp(1.75rem, 5vw, 3rem);
+}
+
+.contacto__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--borde);
+}
+
+.info-row:last-of-type {
+  border-bottom: 1px solid var(--borde);
+}
+
+.info-row__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.info-row__icon--azul {
+  color: var(--azul);
+}
+.info-row__icon--rojo {
+  color: var(--rojo);
+}
+
+.info-row__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.info-row__label {
+  font-family: var(--fuente-titulo);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  color: var(--texto-suave);
+}
+
+.info-row__value {
+  font-size: 1.05rem;
+  color: var(--negro);
+}
+
+.info-row__muted {
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.horarios {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.1rem;
+}
+
+.horarios li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.contacto__dir {
+  align-self: flex-start;
+  margin-top: 1.5rem;
+}
+
+/* --- Mapa --- */
+.contacto__map {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radio-lg);
+  border: 1px solid var(--borde);
+  background: var(--gris-claro);
+  min-height: 340px;
+}
+
+.contacto__iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+  filter: grayscale(0.25) contrast(1.03);
+}
+
+@media (min-width: 900px) {
+  .contacto__grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: stretch;
+  }
+  .contacto__map,
+  .contacto__iframe {
+    min-height: 100%;
+  }
+  .contacto__head {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 2.5rem;
+  }
+  .contacto__info {
+    justify-content: center;
+  }
+}
